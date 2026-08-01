@@ -30,7 +30,6 @@ def main():
     # 2. Load Flowsheet
     try:
         current_dir = os.path.dirname(os.path.abspath(__file__))
-        # Use absolute path if provided in CLI, otherwise assume it's in the current directory
         model_path = os.path.join(current_dir, args.flowsheet) if not os.path.isabs(args.flowsheet) else args.flowsheet
         sim = simulator.LoadFlowsheet(model_path)
         print(f"✅ Flowsheet '{args.flowsheet}' loaded successfully.")
