@@ -1,9 +1,13 @@
 import pandas as pd
 from sklearn.linear_model import LinearRegression
+import os
 
 print("Loading dataset...")
 # 1. Load the synthetic data you just generated
-df = pd.read_csv(r"D:\DWSIM\Flash_Dataset.csv")
+# Dynamically point to the same directory
+current_dir = os.path.dirname(os.path.abspath(__file__))
+csv_path = os.path.join(current_dir, "Flash_Dataset.csv")
+df = pd.read_csv(csv_path)
 
 # 2. Define our Features (Input) and Target (Output)
 # X must be a 2D array (a dataframe), y is a 1D series
@@ -21,8 +25,10 @@ print("Model training complete!\n")
 # Let's ask the AI to predict the duty for a temperature that was NOT in your loop (e.g., 325 K)
 test_temperature = 325
 
-# We pass the test temperature to the trained model
-predicted_duty = model.predict([[test_temperature]])
+# We pass the test temperature to the trained model. 
+# Using a DataFrame prevents Scikit-Learn warnings about missing feature names.
+test_data = pd.DataFrame({'Feed_Temperature_K': [test_temperature]})
+predicted_duty = model.predict(test_data)
 
 print("-" * 50)
 print(f"VIRTUAL SOFT SENSOR PREDICTION:")
