@@ -1,10 +1,15 @@
 import clr
 import sys
 import pandas as pd
+import os
 
 # 1. Point to your DWSIM installation
-dwsim_path = r"C:\Users\anike\AppData\Local\DWSIM" 
+# You can set the DWSIM_PATH environment variable, or it defaults to the local path.
+dwsim_path = os.environ.get("DWSIM_PATH", r"C:\Users\anike\AppData\Local\DWSIM")
 sys.path.append(dwsim_path)
+
+# Determine the directory where this script is located
+current_dir = os.path.dirname(os.path.abspath(__file__))
 
 try:
     # 2. Initialize the simulator engine
@@ -13,8 +18,9 @@ try:
     simulator = Automation3()
     print("DWSIM Engine started in the background.")
     
-    # 3. Load your Flash Model
-    sim = simulator.LoadFlowsheet(r"D:\DWSIM\Flash_Model.dwxmz")
+    # 3. Load your Flash Model using a relative path
+    model_path = os.path.join(current_dir, "Flash_Model.dwxmz")
+    sim = simulator.LoadFlowsheet(model_path)
     print("Flowsheet loaded successfully.")
     
     # 4. Target the specific streams
@@ -52,7 +58,9 @@ try:
         print(f"Feed: {temp} K | Heater Duty: {duty_kw:.2f} kW | Vapor: {v_flow:.4f} kg/s")
         
     df = pd.DataFrame(dataset)
-    csv_path = r"D:\DWSIM\Flash_Dataset.csv"
+    
+    # Dynamically point to the same directory to save the CSV
+    csv_path = os.path.join(current_dir, "Flash_Dataset.csv")
     df.to_csv(csv_path, index=False)
     
     print("-" * 50)
