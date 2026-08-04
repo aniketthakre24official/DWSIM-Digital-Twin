@@ -67,20 +67,20 @@ python ai_model.py           # trains the soft sensor, produces best_model.jobli
 Sample output from `ai_model.py`:
 
 ```
-Linear Regression R2 Score: 0.94xx
-Random Forest R2 Score: 0.9xxx
-Selected Best Model: Random Forest (R2 = 0.9xxx)
+Linear Regression R2 Score: 0.3444 
+Random Forest R2 Score: 0.4581
+Selected Best Model: Random Forest (R2 = 0.4581)
 ...
 VIRTUAL SOFT SENSOR PREDICTION:
 If the incoming feed spikes to 325 K...
-The Random Forest AI predicts the Heater Duty will adjust to: xx.xx kW
+The Random Forest AI predicts the Heater Duty will adjust to: 67.41 kW
 ```
 
-*(Run it once and paste your real numbers here — recruiters read this line.)*
+
 
 ![Parity plot](parity_plot.png)
 
-*(Generate `parity_plot.png` locally and commit it so this renders on GitHub.)*
+
 
 ## Scope and limitations
 
