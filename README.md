@@ -75,7 +75,9 @@ VIRTUAL SOFT SENSOR PREDICTION:
 If the incoming feed spikes to 325 K...
 The Random Forest AI predicts the Heater Duty will adjust to: 67.41 kW
 ```
+## Interactive Demo
 
+Run `streamlit run app.py` for a browser-based interface to test any feed temperature interactively, with built-in warnings when predicting outside the model's training range.
 
 
 ![Parity plot](parity_plot.png)
